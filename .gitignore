@@ -61,6 +61,5 @@ typings/
 .next
 
 /build/
-package-lock.json
 /out/
 /.idea/

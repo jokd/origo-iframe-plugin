@@ -18,7 +18,8 @@ module.exports = {
               browsers: ['chrome >= 39']
             },
             modules: false,
-            useBuiltIns: 'usage'
+            useBuiltIns: 'usage',
+            corejs: "3.22"
           }]
         ],
         plugins: [
