@@ -1,19 +1,9 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "prettier"],
   "env": {
     "browser": true
   },
   "rules": {
-    "comma-dangle": ["error", "never"],
-    "import/no-unresolved": "off",
-    "new-cap": "off",
-    "prefer-destructuring": "off",
-    "max-len": "off",
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": [
-        "tasks/**"
-      ],
-      "optionalDependencies": false
-    }]
+    "import/no-unresolved": "off"
   }
 }
