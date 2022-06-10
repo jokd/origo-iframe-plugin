@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+	<title>Origo iframe exempel</title>
+	<style>
+		html, body {
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+		}
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+		select {
+			height: 480px;
+		}
+	</style>
+</head>
+<body>
+<select multiple></select>
+<iframe width="640" height="480" src="/demo/embedded/index.html"></iframe>
+<script type="text/javascript">
+	const selectEl = document.getElementsByTagName("select")[0];
+	const iframeEl = document.getElementsByTagName("iframe")[0];
+
+	function sendMessage(command, payload) {
+		iframeEl.contentWindow.postMessage(`${command}:${payload}`, window.origin);
+	}
+
+	fetch('https://karta.eskilstuna.se/geoserver/etuna/wfs?SERVICE=WFS&VERSION=1.1.1&REQUEST=GetFeature&OUTPUTFORMAT=application/json&TYPENAMES=sokvyx_park_park_lekplats')
+			.then((res) => res.json())
+			.then((res) => {
+				res.features.forEach((f) => {
+					selectEl.add(new Option(f.properties.title, f.properties.sokid));
+				});
+			});
+	selectEl.addEventListener("input", (e) => {
+		const selected = [...e.target.options].filter((o) => o.selected);
+		sendMessage('setVisibleIDs', selected.map((o) => o.value).join(','));
+		sendMessage('zoomTo', selected[selected.length - 1].value);
+	});
+</script>
+</body>
+</html>

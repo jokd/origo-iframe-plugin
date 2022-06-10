@@ -1,0 +1,173 @@
+{
+  "svgSpritePath": "http://localhost:9966/css/svg/",
+  "controls": [
+    {
+      "name": "home",
+      "options": {
+        "zoomOnStart": true
+      }
+    },
+    {
+      "name": "mapmenu",
+      "options": {
+        "isActive": false
+      }
+    },
+    {
+      "name": "sharemap"
+    },
+    {
+      "name": "geoposition"
+    },
+    {
+      "name": "print"
+    },
+    {
+      "name": "about",
+      "options": {
+        "buttonText": "Om Origo",
+        "title": "Om Origo",
+        "content": "<p>Origo är ett ramverk för webbkartor. Ramverket bygger på JavaScript-biblioteket OpenLayers. Du kan använda Origo för att skapa egna webbaserade kartapplikationer.</p><br><p>Projektet drivs och underhålls av ett antal svenska kommuner. Besök gärna <a href='https://github.com/origo-map/origo' target='_blank'>Origo på GitHub</a> för mer information.</p>"
+      }
+    },
+    {
+      "name": "link",
+      "options": {
+        "title": "Origo",
+        "url": "https://github.com/origo-map/origo"
+      }
+    },
+    {
+      "name": "legend",
+      "options": {
+        "labelOpacitySlider": "Opacity",
+        "useGroupIndication" : true
+      }
+    },
+    {
+      "name": "position",
+      "options": {
+        "title": "Web Mercator",
+        "projections": {
+          "EPSG:4326": "WGS84",
+          "EPSG:3006": "Sweref99 TM"
+        }
+      }
+    },
+    {
+      "name": "measure"
+    }
+  ],
+  "pageSettings": {
+    "footer": {
+      "img": "http://localhost:9966/img/png/logo.png",
+      "url": "https://github.com/origo-map/origo",
+      "text": "Origo"
+    },
+    "mapGrid": {
+      "visible": true
+    }
+  },
+  "projectionCode": "EPSG:3010",
+  "projectionExtent": [
+    -2138120,
+    3880750,
+    2396422,
+    8973750
+  ],
+  "proj4Defs": [
+    {
+        "code": "EPSG:3010",
+        "alias": "urn:ogc:def:crs:EPSG::3010",
+        "projection": "+proj=tmerc +lat_0=0 +lon_0=16.5 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+        "code": "EPSG:3006",
+        "projection": "+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    }
+  ],
+  "extent": [
+    -2138120,
+    3880750,
+    2396422,
+    8973750
+  ],
+  "home": [
+    105085,
+    6571627,
+    219773,
+    6628182
+  ],
+  "center": [
+    150794,
+    6583990
+  ],
+  "zoom": 7,
+  "resolutions": [
+    4200,
+    1399.9999999999998,
+    560,
+    140,
+    55.9999999999999,
+    27.99999999999996,
+    13.999999999999998,
+    6.999999999999999,
+    5.6,
+    3.4999999999999996,
+    2.8,
+    1.4,
+    0.7,
+    0.28,
+    0.14,
+    0.112,
+    0.028
+  ],
+  "featureinfoOptions": {
+    "infowindow": "overlay"
+  },
+  "source": {
+    "etuna": {
+      "url": "https://karta.eskilstuna.se/geoserver/etuna/wms"
+    }
+  },
+  "groups": [
+    {
+      "name": "background",
+      "title": "Bakgrundskartor",
+      "expanded": true
+    }
+  ],
+  "layers": [
+    {
+      "name": "sokvyx_park_park_lekplats",
+      "title": "Lekplatser",
+      "group": "root",
+      "queryable": true,
+      "type": "WMS",
+      "visible": true,
+      "searchable": true,
+      "source": "etuna",
+      "infoFormat": "text/html"
+    },
+    {
+      "name": "osm",
+      "title": "OpenStreetMap",
+      "group": "background",
+      "queryable": false,
+      "style": "karta_osm",
+      "type": "OSM",
+      "visible": true
+    }
+  ],
+  "styles": {
+    "karta_osm": [
+      [
+        {
+          "image": {
+            "src": "http://localhost:9966/img/png/osm.png"
+          }
+        }
+      ]
+    ]
+  }
+}
