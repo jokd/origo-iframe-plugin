@@ -12,10 +12,10 @@ Ger ett API för att styra delar av Origo inuti en `<iframe>`.
 ### Meddelanden
 
 - `setFilter:<cql>`: Sätt ett eget CQL filter.
-- `setVisibleIDs:<id1>,<id2>,...,<idn>`: Filtrera så att enbart features vars `layerIDField` har något av dessa värden.
-- `resetFilter`: Nollställ filtret, visar alla features.
-- `zoomTo:<id>`: Zooma till den feature vars `layerIDField` är lika med `<id>`.
-- `panTo:<id>`: Panorera till den feature vars `layerIDField` är lika med `<id>`.
+- `setVisibleIDs:<id1>,<id2>,...,<idn>`: Filtrera så att enbart features vars `layerIDField` har något av dessa värden visas.
+- `resetFilter`: Nollställ filtret, visa alla features.
+- `zoomTo:<id1>,<id2>,...,<idn>`: Zooma till mitten av de features vars `layerIDField` matchar ett `<id>`.
+- `panTo:<id1>,<id2>,...,<idn>`: Panorera till mitten av de features vars `layerIDField` matchar ett `<id>`.
 
 ### Exempel
 
