@@ -101,7 +101,7 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
           return;
         }
 
-      /* if (
+        /* if (
           event.origin !== 'https://valid-domain' &&
           event.origin !== 'https://valid-domain-number-two'
         )
@@ -115,7 +115,7 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
           applyFiltering();
         } else if (command === 'setVisibleIDs') {
           // command to filter by the ID field
-          cqlFilter = `${layerIDField} in (${getFilterIds(payload.split(','))})`
+          cqlFilter = `${layerIDField} in (${getFilterIds(payload.split(','))})`;
           applyFiltering();
         } else if (command === 'resetFilter') {
           // command to reset the filter, showing all features
@@ -124,7 +124,9 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
         } else if (command === 'panTo') {
           // command to pan to an array of features. If they do not fit inside the view then they do not fit inside the view.
           getFeatures(payload.split(',')).then(featureArray => {
-            const coordinateArray = featureArray.map(feature => feature.getGeometry().getFirstCoordinate());
+            const coordinateArray = featureArray.map(feature =>
+              feature.getGeometry().getFirstCoordinate()
+            );
             viewer
               .getMap()
               .getView()
@@ -133,7 +135,9 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
         } else if (command === 'zoomTo') {
           // command to zoom to a an array of features
           getFeatures(payload.split(',')).then(featureArray => {
-            const coordinateArray = featureArray.map(feature => feature.getGeometry().getFirstCoordinate());
+            const coordinateArray = featureArray.map(feature =>
+              feature.getGeometry().getFirstCoordinate()
+            );
             viewer
               .getMap()
               .getView()
