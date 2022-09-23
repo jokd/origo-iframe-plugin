@@ -1,10 +1,9 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = merge(common, {
   output: {
-    path: `${__dirname}/../out`,
+    path: `${__dirname}/../../origo/plugins`,
     publicPath: '/build/js',
     filename: 'origoiframeetuna.js',
     libraryTarget: 'var',
@@ -12,13 +11,18 @@ module.exports = merge(common, {
     library: 'Origoiframeetuna'
   },
   mode: 'development',
-  module: {
-  },
-  plugins: [
-    new WriteFilePlugin()
-  ],
+  devtool: 'source-map',
+  module: {},
   devServer: {
-    contentBase: './',
-    port: 9010
+    static: './',
+    port: 9001,
+    devMiddleware: {
+      //index: true,
+      //mimeTypes: { 'text/html': ['phtml'] },
+      //publicPath: '/publicPathForDevServe',
+      //serverSideRender: true,
+      writeToDisk: true,
+    },
+    
   }
 });
