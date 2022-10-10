@@ -28,11 +28,11 @@ eller
 
 Exempelobjekt:
 ```javascript
-		const zoomToMessage = {
-			command: 'zoomTo',
-    		targetLayer: 'sokvyxw_utegym',
-			ids: ['uuid4', 'uuid5', 'uuid9']
-		}
+const zoomToMessage = {
+	command: 'zoomTo',
+    	targetLayer: 'sokvyxw_utegym',
+	ids: ['uuid4', 'uuid5', 'uuid9']
+	}
 ```
 
 ### Exempelinställning:
