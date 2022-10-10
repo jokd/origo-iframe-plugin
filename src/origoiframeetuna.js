@@ -3,10 +3,10 @@ import GeoJSON from 'ol/format/GeoJSON';
 import {boundingExtent, getCenter} from 'ol/extent';
 
 /**
- * @param {{ layerName: string, layerIDField: string, maxZoom: number=, zoomDuration: number= }} options
+ * @param {{ layerIDField: string, maxZoom: number=, zoomDuration: number= }} options
  */
 const Origoiframeetuna = function Origoiframeetuna(options = {}) {
-  const {layerName, layerIDField, maxZoom, zoomDuration} = options;
+  const {layerIDField, maxZoom, zoomDuration} = options;
 
   let viewer;
 
@@ -16,8 +16,8 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
   /**
    * Apply the current filter (from `cqlFilter`) to the layer
    */
-  function applyFiltering() {
-    const layer = viewer.getLayer(layerName);
+  function applyFiltering(targetLayer) {
+    const layer = viewer.getLayer(targetLayer);
     if (layer.get('type') === 'WMS') {
       layer.getSource().updateParams({CQL_FILTER: cqlFilter});
     } else {
@@ -43,12 +43,12 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
    * @param {String[]} ids
    * @returns {Promise<import("ol/Feature").default[]>}
    */
-  function getFeaturesFromWFS(url, ids) {
+  function getFeaturesFromWFS(targetLayer, url, ids) {
     url.searchParams.set('service', 'WFS');
     url.searchParams.set('version', '1.1.1');
     url.searchParams.set('request', 'GetFeature');
     url.searchParams.set('outputFormat', 'application/json');
-    url.searchParams.set('typeNames', layerName);
+    url.searchParams.set('typeNames', targetLayer);
     url.searchParams.set('cql_filter', `${layerIDField} in (${getFilterIds(ids)})`);
 
     return fetch(url.toString())
@@ -61,8 +61,8 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
    * @param {String[]} ids
    * @returns {Promise<import("ol/Feature").default[]>}
    */
-  function getFeatures(ids) {
-    const layer = viewer.getLayer(layerName);
+  function getFeatures(targetLayer, ids) {
+    const layer = viewer.getLayer(targetLayer);
     if (layer.get('type') === 'WMS') {
       // this works for geoserver, but might not for others
       const source = layer.getSource();
@@ -70,7 +70,7 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
         typeof source.getUrl === 'function' ? source.getUrl() : source.getUrls()[0]
       );
       url.pathname = url.pathname.replace('wms', 'wfs');
-      return getFeaturesFromWFS(url, ids);
+      return getFeaturesFromWFS(targetLayer, url, ids);
     }
     /*  
     if (layer.get('type') === 'WFS') {
@@ -96,34 +96,45 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
     name: 'origoiframeetuna',
     onInit() {
       window.addEventListener('message', event => {
-        if (typeof event.data !== 'string' || (event.data.match(/:/g) || []).length !== 1) {
-          console.warn('Received a message with an invalid format. Expected <command>:<payload>');
-          return;
-        }
-
         /* if (
           event.origin !== 'https://valid-domain' &&
           event.origin !== 'https://valid-domain-number-two'
         )
           return; */
 
-        const [command, payload] = event.data.split(':');
+        const {command, targetLayer, ids, filter} = event.data;
+        if (!command || !targetLayer) {
+          console.warn(
+            'An object with a command, targetLayer as well as either ids or filter property is required.'
+          );
+          return;
+        }
+        if (command === 'setFilter' && !filter) {
+          console.warn('An object with the setFilter command needs a filter property too.');
+          return;
+        }
+        if (command !== 'setFilter' && command !== 'resetFilter' && !ids) {
+          console.warn(
+            'An object with a panToo, zoomTo or setVisibleIDs command needs an ids property too.'
+          );
+          return;
+        }
 
         if (command === 'setFilter') {
           // command to set a raw CQL query
-          cqlFilter = payload;
-          applyFiltering();
+          cqlFilter = filter;
+          applyFiltering(targetLayer);
         } else if (command === 'setVisibleIDs') {
           // command to filter by the ID field
-          cqlFilter = `${layerIDField} in (${getFilterIds(payload.split(','))})`;
-          applyFiltering();
+          cqlFilter = `${layerIDField} in (${getFilterIds(ids)})`;
+          applyFiltering(targetLayer);
         } else if (command === 'resetFilter') {
           // command to reset the filter, showing all features
           cqlFilter = undefined;
-          applyFiltering();
+          applyFiltering(targetLayer);
         } else if (command === 'panTo') {
           // command to pan to an array of features. If they do not fit inside the view then they do not fit inside the view.
-          getFeatures(payload.split(',')).then(featureArray => {
+          getFeatures(targetLayer, ids).then(featureArray => {
             const coordinateArray = featureArray.map(feature =>
               feature.getGeometry().getFirstCoordinate()
             );
@@ -134,7 +145,7 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
           });
         } else if (command === 'zoomTo') {
           // command to zoom to a an array of features
-          getFeatures(payload.split(',')).then(featureArray => {
+          getFeatures(targetLayer, ids).then(featureArray => {
             const coordinateArray = featureArray.map(feature =>
               feature.getGeometry().getFirstCoordinate()
             );
@@ -149,7 +160,7 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
           });
         } else {
           console.warn(
-            'Received a message with an invalid command. Expected setFilter|setVisibleIDs|resetVisible|panTo|zoomTo.'
+            'Received a message with an invalid command. Expected setFilter|setVisibleIDs|resetFilter|panTo|zoomTo.'
           );
         }
       });

@@ -23,26 +23,39 @@
 </head>
 <body>
 <select multiple></select>
-<iframe width="640" height="480" src="/demo/embedded/index.html"></iframe>
+<iframe width="640" height="480" src="../demo/embedded/index.html"></iframe>
 <script type="text/javascript">
 	const selectEl = document.getElementsByTagName("select")[0];
 	const iframeEl = document.getElementsByTagName("iframe")[0];
 
-	function sendMessage(command, payload) {
-		iframeEl.contentWindow.postMessage(`${command}:${payload}`, window.origin);
+	function sendMessage(message) {
+		iframeEl.contentWindow.postMessage(message, window.origin);
 	}
 
-	fetch('https://karta.eskilstuna.se/geoserver/etuna/wfs?SERVICE=WFS&VERSION=1.1.1&REQUEST=GetFeature&OUTPUTFORMAT=application/json&TYPENAMES=sokvyx_park_park_lekplats')
+	fetch('https://karta.eskilstuna.se/geoserver/etuna/wfs?SERVICE=WFS&VERSION=1.1.1&REQUEST=GetFeature&OUTPUTFORMAT=application/json&TYPENAMES=sokvyxw_utegym')
 			.then((res) => res.json())
 			.then((res) => {
 				res.features.forEach((f) => {
-					selectEl.add(new Option(f.properties.title, f.properties.sokid));
+					if (!f.properties.title.toLowerCase().includes(("test"))) {
+						selectEl.add(new Option(f.properties.title, f.properties.sv_global_id))
+					}
 				});
 			});
 	selectEl.addEventListener("input", (e) => {
 		const selected = [...e.target.options].filter((o) => o.selected);
-		sendMessage('setVisibleIDs', selected.map((o) => o.value).join(','));
-		sendMessage('zoomTo', selected[selected.length - 1].value);
+		const filterMessage = {
+			command: 'setVisibleIDs',
+    		targetLayer: 'sokvyxw_utegym',
+			ids: selected.map((o) => o.value)
+		}
+		const zoomToMessage = {
+			command: 'zoomTo',
+    		targetLayer: 'sokvyxw_utegym',
+			ids: selected.map((o) => o.value)
+		}
+			
+		sendMessage(filterMessage)
+		sendMessage(zoomToMessage)
 	});
 </script>
 </body>

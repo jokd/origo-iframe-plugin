@@ -3,7 +3,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   output: {
-    path: `${__dirname}/../../origo/plugins`,
+    path: `${__dirname}/../out`,
     publicPath: '/build/js',
     filename: 'origoiframeetuna.js',
     libraryTarget: 'var',

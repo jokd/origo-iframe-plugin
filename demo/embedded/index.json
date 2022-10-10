@@ -41,7 +41,8 @@
       "name": "legend",
       "options": {
         "labelOpacitySlider": "Opacity",
-        "useGroupIndication" : true
+        "useGroupIndication" : true,
+        "hideWhenEmbedded": false
       }
     },
     {
@@ -75,6 +76,7 @@
     2396422,
     8973750
   ],
+  "constrainResolution": true,
   "proj4Defs": [
     {
         "code": "EPSG:3010",
@@ -139,16 +141,18 @@
   ],
   "layers": [
     {
-      "name": "sokvyx_park_park_lekplats",
-      "title": "Lekplatser",
+      "name": "sokvyxw_utegym",
+      "title": "Utegym",
       "group": "root",
       "queryable": true,
       "type": "WMS",
       "visible": true,
-      "searchable": true,
       "source": "etuna",
-      "infoFormat": "text/html"
-    },
+      "legendParams" : {
+        "legend_options" : "dpi:300"
+      }
+  },
+
     {
       "name": "osm",
       "title": "OpenStreetMap",
@@ -158,6 +162,7 @@
       "type": "OSM",
       "visible": true
     }
+
   ],
   "styles": {
     "karta_osm": [
