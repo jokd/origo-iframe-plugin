@@ -7,6 +7,7 @@ Ger ett API för att styra delar av Origo inuti en `<iframe>` via https://develo
 - `layerIDField`: Fältet i lagret som används som unikt ID. **Obligatorisk**.
 - `maxZoom`: Maximal inzoomningsnivå. **Valfri**.
 - `zoomDuration`: Tid (i millisekunder) för att genomföra en zoomning. **Valfri**.
+- `allowedOrigins`: En array med strängar för tillåtna ursprung att acceptera meddelanden från. **Valfri**
 
 ### Meddelanden
 
@@ -44,7 +45,8 @@ const zoomToMessage = {
       var origoiframeetuna = Origoiframeetuna({
           layerIDField: "globalId",
           maxZoom: 11,
-          zoomDuration: 750
+          zoomDuration: 750,
+          allowedOrigins: ["http://localhost:9001", "https://www.somedomain.net"]
       });
       viewer.addComponent(origoiframeetuna);
     });

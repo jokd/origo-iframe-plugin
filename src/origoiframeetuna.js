@@ -6,7 +6,7 @@ import {boundingExtent, getCenter} from 'ol/extent';
  * @param {{ layerIDField: string, maxZoom: number=, zoomDuration: number= }} options
  */
 const Origoiframeetuna = function Origoiframeetuna(options = {}) {
-  const {layerIDField, maxZoom, zoomDuration} = options;
+  const {layerIDField, maxZoom, zoomDuration, allowedOrigins} = options;
 
   let viewer;
 
@@ -96,11 +96,9 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
     name: 'origoiframeetuna',
     onInit() {
       window.addEventListener('message', event => {
-        /* if (
-          event.origin !== 'https://valid-domain' &&
-          event.origin !== 'https://valid-domain-number-two'
-        )
-          return; */
+        if (allowedOrigins) {
+          if (!allowedOrigins.some(origin => origin === event.origin)) return;
+        }
 
         const {command, targetLayer, ids, filter} = event.data;
         if (!command || !targetLayer) {
