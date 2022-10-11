@@ -32,6 +32,7 @@ const Origoiframeetuna = function Origoiframeetuna(options = {}) {
    * @returns {String[]}
    */
   function getFilterIds(ids) {
+    if (ids.length === 0) return "''";
     const newArray = ids.map(id => `'${id}'`);
     return newArray.join();
   }
