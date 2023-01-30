@@ -336,7 +336,7 @@
       "group": "Motionofritid",
       "style": "park",
       "type": "WMS",
-      "visible": true,
+      "visible": false,
       "featuretype": 3,
       "attributes": [
         {

@@ -1,0 +1,27 @@
+{
+"type": "FeatureCollection",
+"name": "origo-cities-3857",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "name": "Karlstad" }, "geometry": { "type": "Point", "coordinates": [ 1615194.134205403272063, 8500323.745719697326422 ] } },
+{ "type": "Feature", "properties": { "id": 2, "name": "Hallstahammar" }, "geometry": { "type": "Point", "coordinates": [ 1576518.85785721684806, 8566495.900334805250168 ] } },
+{ "type": "Feature", "properties": { "id": 3, "name": "Västerås" }, "geometry": { "type": "Point", "coordinates": [ 1561316.007359017618001, 8618874.817704180255532 ] } },
+{ "type": "Feature", "properties": { "id": 4, "name": "Eskilstuna" }, "geometry": { "type": "Point", "coordinates": [ 1598559.937257338082418, 8527671.789288371801376 ] } },
+{ "type": "Feature", "properties": { "id": 5, "name": "Strängnäs" }, "geometry": { "type": "Point", "coordinates": [ 1602196.726588885299861, 8730764.007077738642693 ] } },
+{ "type": "Feature", "properties": { "id": 6, "name": "Enköping" }, "geometry": { "type": "Point", "coordinates": [ 1574019.445181991439313, 8660979.426490403711796 ] } },
+{ "type": "Feature", "properties": { "id": 7, "name": "Sigtuna" }, "geometry": { "type": "Point", "coordinates": [ 1588851.641888547455892, 8693925.329209230840206 ] } },
+{ "type": "Feature", "properties": { "id": 8, "name": "Hudiksvall" }, "geometry": { "type": "Point", "coordinates": [ 1622647.34574355953373, 8865648.031008776277304 ] } },
+{ "type": "Feature", "properties": { "id": 9, "name": "Nordanstig" }, "geometry": { "type": "Point", "coordinates": [ 1658739.036150105530396, 8851263.243164340034127 ] } },
+{ "type": "Feature", "properties": { "id": 10, "name": "Ånge" }, "geometry": { "type": "Point", "coordinates": [ 1642146.968491343315691, 8859796.06112346984446 ] } },
+{ "type": "Feature", "properties": { "id": 11, "name": "Sundsvall" }, "geometry": { "type": "Point", "coordinates": [ 1673485.683579388307407, 8846155.889019776135683 ] } },
+{ "type": "Feature", "properties": { "id": 12, "name": "Timrå" }, "geometry": { "type": "Point", "coordinates": [ 1687402.078309956938028, 8837276.392196035012603 ] } },
+{ "type": "Feature", "properties": { "id": 13, "name": "Härnösand" }, "geometry": { "type": "Point", "coordinates": [ 1705371.935595617396757, 8829977.14983319863677 ] } },
+{ "type": "Feature", "properties": { "id": 14, "name": "Kramfors" }, "geometry": { "type": "Point", "coordinates": [ 1715146.238678215770051, 8822873.627145506441593 ] } },
+{ "type": "Feature", "properties": { "id": 15, "name": "Sollefteå" }, "geometry": { "type": "Point", "coordinates": [ 1611080.981099732918665, 8854027.661256864666939 ] } },
+{ "type": "Feature", "properties": { "id": 16, "name": "Örnsköldsvik" }, "geometry": { "type": "Point", "coordinates": [ 1617277.171827603830025, 8812028.279517199844122 ] } },
+{ "type": "Feature", "properties": { "id": 17, "name": "Norberg" }, "geometry": { "type": "Point", "coordinates": [ 1608057.896555985556915, 8760087.113938832655549 ] } },
+{ "type": "Feature", "properties": { "id": 18, "name": "Avesta" }, "geometry": { "type": "Point", "coordinates": [ 1614935.505107052391395, 8831378.459389850497246 ] } },
+{ "type": "Feature", "properties": { "id": 19, "name": "Fagersta" }, "geometry": { "type": "Point", "coordinates": [ 1616505.536757682450116, 8787972.217703368514776 ] } },
+{ "type": "Feature", "properties": { "id": 20, "name": "Kristianstad" }, "geometry": { "type": "Point", "coordinates": [ 1635232.135406067362055, 8450936.225379204377532 ] } }
+]
+}

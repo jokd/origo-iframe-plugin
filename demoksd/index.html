@@ -23,13 +23,13 @@
 </head>
 <body>
 <select multiple></select>
-<iframe width="640" height="480" src="/demo/embedded/index.html"></iframe>
+<iframe width="640" height="480" src="/demoksd/embedded/index.html"></iframe>
 <script type="text/javascript">
 	const selectEl = document.getElementsByTagName("select")[0];
 	const iframeEl = document.getElementsByTagName("iframe")[0];
 
 	function sendMessage(command, payload) {
-		console.log("send message");
+		//console.log("send message");
 		iframeEl.contentWindow.postMessage(`${command}:${payload}`, window.origin);
 	}
 
@@ -41,7 +41,7 @@
 				});
 			});
 	selectEl.addEventListener("input", (e) => {
-		console.log(...e.target.options);
+		//console.log(...e.target.options);
 		const selected = [...e.target.options].filter((o) => o.selected);
 		sendMessage('setVisibleIDs', selected.map((o) => o.value).join(','));
 		sendMessage('zoomTo', selected[selected.length - 1].value);

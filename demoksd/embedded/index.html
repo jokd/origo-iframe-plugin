@@ -17,19 +17,20 @@
 </div>
 <script src="http://localhost:9966/js/origo.js"></script>
 <!-- <script src="http://localhost:9966/plugins/origoiframeetuna.js"></script> -->
-<script src="/out/origoiframeetuna.js"></script>
+<!-- <script src="/out/origoiframeetuna.js"></script> -->
 <script type="text/javascript">
 	//Init origo
 	var origo = Origo('index.json', { svgSpritePath: 'http://localhost:9966/css/svg/' });
-	origo.on('load', function (viewer) {
+/*	origo.on('load', function (viewer) {
 	  var origoiframeetuna = Origoiframeetuna({
-		  layerName: "vy_webbkarta_na_np_parker",
-		  layerIDField: "itstitle",
-		  maxZoom: 11,
+			// plockar bort LayerName och layerIdField, definieras vid varje message vilket lagernamn och id som tillämpas
+			maxZoom: 11,
 		  zoomDuration: 750
 	  });
 	  viewer.addComponent(origoiframeetuna);
-	});
+	}); */
+	//layerName: "vy_webbkarta_na_np_parker",
+	//layerIDField: "itstitle",
 </script>
 </body>
 </html>
